@@ -1,0 +1,21 @@
+{
+  "name": "weemen/blogpost-domain",
+  "type": "library",
+  "autoload": {
+    "psr-4": {
+      "Weemen\\BlogPost\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Weemen\\BlogPost\\": "test"
+    }
+  },
+  "require": {
+    "php": ">=7.0.0-dev",
+    "broadway/broadway": "~0.5"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "4.7.2"
+  }
+}
