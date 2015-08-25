@@ -10,11 +10,6 @@ use Weemen\BlogPost\Domain\BlogPost\BlogPostId;
 class BlogPostsPublished implements ReadModelInterface
 {
     /**
-     * @var int
-     */
-    private $id;
-
-    /**
      * @var string
      */
     private $blogPostId;
@@ -66,7 +61,7 @@ class BlogPostsPublished implements ReadModelInterface
      */
     public function getId()
     {
-        return $this->id;
+        return $this->blogPostId;
     }
 
 }
