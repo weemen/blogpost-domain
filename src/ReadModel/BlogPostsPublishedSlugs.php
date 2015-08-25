@@ -32,11 +32,11 @@ class BlogPostsPublishedSlugs implements ReadModelInterface
      * @param string $source
      * @param DateTime $lastModified
      */
-    public function __construct(BlogPostId $blogPostId, string $title, string $content)
+    public function __construct(BlogPostId $blogPostId, string $title, string $slug)
     {
         $this->blogPostId   = $blogPostId;
         $this->title        = $title;
-        $this->content      = $content;
+        $this->slug         = $slug;
     }
 
     /**
