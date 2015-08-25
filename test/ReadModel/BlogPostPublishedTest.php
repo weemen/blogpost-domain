@@ -49,6 +49,37 @@ class BlogPostPublishedTest extends ProjectorScenarioTestCase
             ]);
     }
 
+    public function testItCanUnpublishReadModel()
+    {
+        $blogPostId = "00000000-0000-0000-0000-000000000000";
+        $title      = "title";
+        $content    = "content";
+        $author     = "author";
+        $source     = "twitter";
+
+        $this->scenario
+            ->given([
+                new BlogPostCreated(
+                    new BlogPostId($blogPostId),
+                    $title,
+                    $content,
+                    $author,
+                    true,
+                    $source
+                )
+            ])
+            ->when(new BlogPostEdited(
+                new BlogPostId($blogPostId),
+                $title,
+                $content,
+                $author,
+                false,
+                $source
+            ))
+            ->then([
+            ]);
+    }
+
     /**
      * @param InMemoryRepository $repository
      * @return BlogPostsPublishedProjector
