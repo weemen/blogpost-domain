@@ -7,7 +7,7 @@ use Broadway\ReadModel\Projector;
 use Cocur\Slugify\Slugify;
 use Weemen\BlogPost\Domain\BlogPost\BlogPostEdited;
 
-class BlogPostPublishedSlugsProjector extends Projector
+class BlogPostsPublishedSlugsProjector extends Projector
 {
 
     /**
@@ -34,7 +34,7 @@ class BlogPostPublishedSlugsProjector extends Projector
         }
 
         $slugify   = new Slugify();
-        $readModel = new BlogPostPublishedSlugs(
+        $readModel = new BlogPostsPublishedSlugs(
             $event->blogPostId(),
             $event->title(),
             $slugify->slugify($event->title())

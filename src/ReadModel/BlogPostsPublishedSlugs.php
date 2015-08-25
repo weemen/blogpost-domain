@@ -6,7 +6,7 @@ namespace Weemen\BlogPost\ReadModel;
 use Broadway\ReadModel\ReadModelInterface;
 use Weemen\BlogPost\Domain\BlogPost\BlogPostId;
 
-class BlogPostPublishedSlugs implements ReadModelInterface
+class BlogPostsPublishedSlugs implements ReadModelInterface
 {
 
     /**

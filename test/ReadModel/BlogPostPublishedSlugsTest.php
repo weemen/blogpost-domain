@@ -84,22 +84,22 @@ class BlogPostPublishedSlugsTest extends ProjectorScenarioTestCase
 
     /**
      * @param InMemoryRepository $repository
-     * @return BlogPostPublishedSlugsProjector
+     * @return BlogPostsPublishedSlugsProjector
      */
-    protected function createProjector(InMemoryRepository $repository) : BlogPostPublishedSlugsProjector
+    protected function createProjector(InMemoryRepository $repository) : BlogPostsPublishedSlugsProjector
     {
-        return new BlogPostPublishedSlugsProjector($repository);
+        return new BlogPostsPublishedSlugsProjector($repository);
     }
 
     /**
      * @param BlogPostId $blogPostId
      * @param string $title
      * @param string $slug
-     * @return BlogPostPublishedSlugs
+     * @return BlogPostsPublishedSlugs
      */
-    private function createReadModel(BlogPostId $blogPostId, string $title, string $slug) : BlogPostPublishedSlugs
+    private function createReadModel(BlogPostId $blogPostId, string $title, string $slug) : BlogPostsPublishedSlugs
     {
-        $readModel = new BlogPostPublishedSlugs($blogPostId, $title, $slug);
+        $readModel = new BlogPostsPublishedSlugs($blogPostId, $title, $slug);
         return $readModel;
     }
 }
