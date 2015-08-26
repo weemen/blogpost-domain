@@ -14,9 +14,18 @@
   "require": {
     "php": ">=7.0.0-dev",
     "broadway/broadway": "~0.5",
-    "cocur/slugify": "^1.2"
+    "cocur/slugify": "^1.2",
+    "simgroep/event-sourcing": "dev-feature/repla_step_by_step_generator_style",
+    "jurjean/spray-serializer-bundle": "dev-master",
+    "jurjean/spray-serializer": "dev-master"
   },
   "require-dev": {
     "phpunit/phpunit": "4.7.2"
-  }
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/weemen/event-sourcing.git"
+    }
+  ]
 }
