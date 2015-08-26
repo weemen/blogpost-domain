@@ -3,6 +3,11 @@
 namespace Weemen\BlogPost\ReadModel\ElasticSearch;
 
 use Broadway\ReadModel\RepositoryInterface;
+use Broadway\ReadModel\ReadModelInterface;
+use Broadway\Serializer\SerializerInterface;
+use Elasticsearch\Client;
+use Elasticsearch\Common\Exceptions\Missing404Exception;
+
 use Simgroep\EventSourcing\EventSourcingBundle\ReadModel\ClearableRepositoryInterface;
 
 class ElasticSearchRepository implements RepositoryInterface, ClearableRepositoryInterface
