@@ -3,6 +3,8 @@
 namespace Weemen\BlogPost\Domain\BlogPost;
 
 
+use DateTime;
+
 class BlogPostEdited
 {
 
@@ -37,6 +39,10 @@ class BlogPostEdited
      */
     protected $source;
 
+    /**
+     * @var string
+     */
+    protected $publishDate;
 
     /**
      * @param BlogPostId $blogPostId
@@ -44,14 +50,15 @@ class BlogPostEdited
      * @param string $content
      * @param string $author
      */
-    public function __construct(BlogPostId $blogPostId, string $title, string $content, string $author, bool $published, string $source)
+    public function __construct(BlogPostId $blogPostId, string $title, string $content, string $author, bool $published, string $source, string $publishDate)
     {
-        $this->blogPostId = $blogPostId;
-        $this->title      = $title;
-        $this->content    = $content;
-        $this->author     = $author;
-        $this->published  = $published;
-        $this->source     = $source;
+        $this->blogPostId  = $blogPostId;
+        $this->title       = $title;
+        $this->content     = $content;
+        $this->author      = $author;
+        $this->published   = $published;
+        $this->source      = $source;
+        $this->publishDate = $publishDate;
     }
 
     /**
@@ -100,5 +107,13 @@ class BlogPostEdited
     public function source() : string
     {
         return $this->source;
+    }
+
+    /**
+     * @return string
+     */
+    public function publishDate() : string
+    {
+        return $this->publishDate;
     }
 }

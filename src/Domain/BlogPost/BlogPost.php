@@ -45,6 +45,16 @@ class BlogPost extends EventSourcedAggregateRoot
     protected $deleted;
 
     /**
+     * @var string
+     */
+    protected $publishDate;
+
+    /**
+     * @var DateTime
+     */
+    protected $lastModificationDate;
+
+    /**
      * @return string
      */
     public function getAggregateRootId()
@@ -62,8 +72,14 @@ class BlogPost extends EventSourcedAggregateRoot
      */
     public static function createBlogPost(BlogPostId $blogPostId, string $title, string $content, string $author, bool $published, string $source) : BlogPost
     {
+        $publishDate = '';
+        if ($published) {
+            $dateTime    = new \DateTime('now');
+            $publishDate = $dateTime->createFromFormat('Y-m-d H:i:s');
+        }
+
         $blogPost = new BlogPost();
-        $blogPost->apply(new BlogPostCreated($blogPostId, $title, $content, $author, $published, $source));
+        $blogPost->apply(new BlogPostCreated($blogPostId, $title, $content, $author, $published, $source, $publishDate));
 
         return $blogPost;
     }
@@ -80,6 +96,8 @@ class BlogPost extends EventSourcedAggregateRoot
         $this->published  = $event->published();
         $this->source     = $event->source();
         $this->deleted    = false;
+        $this->lastModificationDate = new \DateTime('now');
+        $this->publishDate = $event->publishDate();
     }
 
     /**
@@ -96,7 +114,13 @@ class BlogPost extends EventSourcedAggregateRoot
         $this->assertContentNotEmpty($content);
         $this->assertAuthorNotEmpty($author);
 
-        $this->apply(new BlogPostEdited($blogPostId, $title, $content, $author, $published, $source));
+        $publishDate = $this->publishDate;
+        if (!empty($this->publishDate) && $published) {
+            $dateTime    = new \DateTime('now');
+            $publishDate = $dateTime->createFromFormat('Y-m-d H:i:s');
+        }
+
+        $this->apply(new BlogPostEdited($blogPostId, $title, $content, $author, $published, $source, $publishDate));
     }
 
     /**
@@ -110,6 +134,8 @@ class BlogPost extends EventSourcedAggregateRoot
         $this->author     = $event->author();
         $this->published  = $event->published();
         $this->source     = $event->source();
+        $this->lastModificationDate = new \DateTime('now');
+        $this->publishDate = $event->publishDate();
     }
 
     /**
@@ -127,6 +153,7 @@ class BlogPost extends EventSourcedAggregateRoot
     {
         $this->published    = false;
         $this->deleted      = true;
+        $this->lastModificationDate = new \DateTime('now');
     }
 
     /**

@@ -32,7 +32,8 @@ class BlogPostPublishedSlugsTest extends ProjectorScenarioTestCase
                 $content,
                 $author,
                 $published,
-                $source
+                $source,
+                ""
             )])
             ->when(new BlogPostEdited(
                 new BlogPostId($blogPostId),
@@ -40,7 +41,8 @@ class BlogPostPublishedSlugsTest extends ProjectorScenarioTestCase
                 $content,
                 $author,
                 true,
-                $source
+                $source,
+                ""
             ))
             ->then([
                 $this->createReadModel(
@@ -67,7 +69,8 @@ class BlogPostPublishedSlugsTest extends ProjectorScenarioTestCase
                     $content,
                     $author,
                     true,
-                    $source
+                    $source,
+                    ""
                 )
             ])
             ->when(new BlogPostEdited(
@@ -76,7 +79,8 @@ class BlogPostPublishedSlugsTest extends ProjectorScenarioTestCase
                 $content,
                 $author,
                 false,
-                $source
+                $source,
+                ""
             ))
             ->then([
             ]);

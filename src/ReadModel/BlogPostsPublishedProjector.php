@@ -5,6 +5,8 @@ namespace Weemen\BlogPost\ReadModel;
 
 use Broadway\ReadModel\Projector;
 use Broadway\ReadModel\RepositoryInterface;
+use DateTime;
+use Weemen\BlogPost\Domain\BlogPost\BlogPostCreated;
 use Weemen\BlogPost\Domain\BlogPost\BlogPostDeleted;
 use Weemen\BlogPost\Domain\BlogPost\BlogPostEdited;
 
@@ -29,9 +31,22 @@ class BlogPostsPublishedProjector extends Projector
     }
 
     /**
+     * @param BlogPostCreated $event
+     */
+    public function applyBlogPostCreated(BlogPostCreated $event)
+    {
+        $this->publishBlogPost($event);
+    }
+
+    /**
      * @param BlogPostEdited $event
      */
     public function applyBlogPostEdited(BlogPostEdited $event)
+    {
+        $this->publishBlogPost($event);
+    }
+
+    protected function publishBlogPost($event)
     {
         if (false === $event->published()) {
             $this->repository->remove((string) $event->blogPostId());
@@ -44,7 +59,8 @@ class BlogPostsPublishedProjector extends Projector
             $event->content(),
             $event->author(),
             $event->source(),
-            new \DateTime('now')
+            new DateTime('now'),
+            \DateTime::createFromFormat('Y-m-d H:i:s',$event->publishDate())
         );
 
         $this->repository->save($readModel);

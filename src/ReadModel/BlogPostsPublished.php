@@ -40,6 +40,10 @@ class BlogPostsPublished implements ReadModelInterface
     private $lastModified;
 
     /**
+     * @var DateTime
+     */
+    private $publishDate;
+    /**
      * @param BlogPostId $blogPostId
      * @param string $title
      * @param string $content
@@ -47,7 +51,7 @@ class BlogPostsPublished implements ReadModelInterface
      * @param string $source
      * @param DateTime $lastModified
      */
-    public function __construct(BlogPostId $blogPostId, string $title, string $content, string $author, string $source, DateTime $lastModified)
+    public function __construct(BlogPostId $blogPostId, string $title, string $content, string $author, string $source, DateTime $lastModified, DateTime $publishDate)
     {
         $this->blogPostId   = $blogPostId;
         $this->title        = $title;
@@ -55,6 +59,7 @@ class BlogPostsPublished implements ReadModelInterface
         $this->author       = $author;
         $this->source       = $source;
         $this->lastModified = $lastModified;
+        $this->publishDate  = $publishDate;
     }
     /**
      * @return string

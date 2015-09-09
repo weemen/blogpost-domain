@@ -38,19 +38,28 @@ class BlogPostCreated
     protected $source;
 
     /**
+     * @var string
+     */
+    protected $publishDate;
+
+    /**
      * @param BlogPostId $blogPostId
      * @param string $title
      * @param string $content
      * @param string $author
+     * @param bool $published
+     * @param string $source
+     * @param string $publishDate
      */
-    public function __construct(BlogPostId $blogPostId, string $title, string $content, string $author, bool $published, string $source)
+    public function __construct(BlogPostId $blogPostId, string $title, string $content, string $author, bool $published, string $source, string $publishDate)
     {
-        $this->blogPostId = $blogPostId;
-        $this->title      = $title;
-        $this->content    = $content;
-        $this->author     = $author;
-        $this->published  = $published;
-        $this->source     = $source;
+        $this->blogPostId   = $blogPostId;
+        $this->title        = $title;
+        $this->content      = $content;
+        $this->author       = $author;
+        $this->published    = $published;
+        $this->source       = $source;
+        $this->publishDate  = $publishDate;
     }
 
     /**
@@ -99,5 +108,13 @@ class BlogPostCreated
     public function source() : string
     {
         return $this->source;
+    }
+
+    /**
+     * @return string|string
+     */
+    public function publishDate() : string
+    {
+        return $this->publishDate;
     }
 }

@@ -17,7 +17,7 @@ class BlogPostTest extends AggregateRootScenarioTestCase
             ->when(function() use ($blogPostId) {
                 return BlogPost::createBlogPost($blogPostId, "title", "content", "Leon", false, "twitter");
             })
-            ->then([new BlogPostCreated($blogPostId, "title", "content", "Leon", false, "twitter")]);
+            ->then([new BlogPostCreated($blogPostId, "title", "content", "Leon", false, "twitter", "")]);
     }
 
     public function testItCanEditExistingBlogPost()
@@ -32,13 +32,13 @@ class BlogPostTest extends AggregateRootScenarioTestCase
         $this->scenario
             ->withAggregateId($blogPostId)
             ->given([
-                new BlogPostCreated($blogPostId, "originalTitle", "originalContent", "originalAuthor", $published, "twitter")
+                new BlogPostCreated($blogPostId, "originalTitle", "originalContent", "originalAuthor", $published, "twitter", "")
             ])
             ->when(function($blogPost) use ($blogPostId, $title, $content, $author, $published, $source) {
                 $blogPost->editBlogPost($blogPostId, $title, $content, $author, $published, $source);
             })
             ->then([
-                new BlogPostEdited($blogPostId, $title, $content, $author, $published, $source)
+                new BlogPostEdited($blogPostId, $title, $content, $author, $published, $source, "")
             ]);
     }
 
@@ -58,13 +58,13 @@ class BlogPostTest extends AggregateRootScenarioTestCase
         $this->scenario
             ->withAggregateId($blogPostId)
             ->given([
-                new BlogPostCreated($blogPostId, "originalTitle", "originalContent", "originalAuthor", $published, "twitter")
+                new BlogPostCreated($blogPostId, "originalTitle", "originalContent", "originalAuthor", $published, "twitter", "")
             ])
             ->when(function($blogPost) use ($blogPostId, $title, $content, $author, $published, $source) {
-                $blogPost->editBlogPost($blogPostId, $title, $content, $author, $published, $source);
+                $blogPost->editBlogPost($blogPostId, $title, $content, $author, $published, $source, "");
             })
             ->then([
-                new BlogPostEdited($blogPostId, $title, $content, $author, $published, $source)
+                new BlogPostEdited($blogPostId, $title, $content, $author, $published, $source, "")
             ]);
     }
 
@@ -84,13 +84,13 @@ class BlogPostTest extends AggregateRootScenarioTestCase
         $this->scenario
             ->withAggregateId($blogPostId)
             ->given([
-                new BlogPostCreated($blogPostId, "originalTitle", "originalContent", "originalAuthor", $published, "twitter")
+                new BlogPostCreated($blogPostId, "originalTitle", "originalContent", "originalAuthor", $published, "twitter", "")
             ])
             ->when(function($blogPost) use ($blogPostId, $title, $content, $author, $published, $source) {
-                $blogPost->editBlogPost($blogPostId, $title, $content, $author, $published, $source);
+                $blogPost->editBlogPost($blogPostId, $title, $content, $author, $published, $source, "");
             })
             ->then([
-                new BlogPostEdited($blogPostId, $title, $content, $author, $published, $source)
+                new BlogPostEdited($blogPostId, $title, $content, $author, $published, $source, "")
             ]);
     }
 
@@ -110,13 +110,13 @@ class BlogPostTest extends AggregateRootScenarioTestCase
         $this->scenario
             ->withAggregateId($blogPostId)
             ->given([
-                new BlogPostCreated($blogPostId, "originalTitle", "originalContent", "originalAuthor", $published, "twitter")
+                new BlogPostCreated($blogPostId, "originalTitle", "originalContent", "originalAuthor", $published, "twitter", "")
             ])
             ->when(function($blogPost) use ($blogPostId, $title, $content, $author, $published, $source) {
-                $blogPost->editBlogPost($blogPostId, $title, $content, $author, $published, $source);
+                $blogPost->editBlogPost($blogPostId, $title, $content, $author, $published, $source, "");
             })
             ->then([
-                new BlogPostEdited($blogPostId, $title, $content, $author, $published, $source)
+                new BlogPostEdited($blogPostId, $title, $content, $author, $published, $source, "")
             ]);
     }
 
@@ -127,7 +127,7 @@ class BlogPostTest extends AggregateRootScenarioTestCase
         $this->scenario
             ->withAggregateId($blogPostId)
             ->given([
-                new BlogPostCreated($blogPostId, "originalTitle", "originalContent", "originalAuthor", false, "twitter")
+                new BlogPostCreated($blogPostId, "originalTitle", "originalContent", "originalAuthor", false, "twitter", "")
             ])
             ->when(function($blogPost) use ($blogPostId) {
                 $blogPost->deleteBlogPost($blogPostId);

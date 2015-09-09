@@ -5,6 +5,7 @@ namespace Weemen\BlogPost\ReadModel;
 use Broadway\ReadModel\RepositoryInterface;
 use Broadway\ReadModel\Projector;
 use Cocur\Slugify\Slugify;
+use Weemen\BlogPost\Domain\BlogPost\BlogPostCreated;
 use Weemen\BlogPost\Domain\BlogPost\BlogPostEdited;
 
 class BlogPostsPublishedSlugsProjector extends Projector
@@ -24,9 +25,22 @@ class BlogPostsPublishedSlugsProjector extends Projector
     }
 
     /**
+     * @param BlogPostCreated $event
+     */
+    public function applyBlogPostCreated(BlogPostCreated $event)
+    {
+        $this->slugifyBlogPost($event);
+    }
+
+    /**
      * @param BlogPostEdited $event
      */
     public function applyBlogPostEdited(BlogPostEdited $event)
+    {
+        $this->slugifyBlogPost($event);
+    }
+
+    protected function slugifyBlogPost($event)
     {
         if (false === $event->published()) {
             $this->repository->remove((string) $event->blogPostId());

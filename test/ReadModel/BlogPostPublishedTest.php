@@ -5,6 +5,7 @@ namespace Weemen\BlogPost\ReadModel;
 
 use Broadway\ReadModel\InMemory\InMemoryRepository;
 use Broadway\ReadModel\Testing\ProjectorScenarioTestCase;
+use DateTime;
 use Weemen\BlogPost\Domain\BlogPost\BlogPostCreated;
 use Weemen\BlogPost\Domain\BlogPost\BlogPostEdited;
 use Weemen\BlogPost\Domain\BlogPost\BlogPostId;
@@ -28,7 +29,8 @@ class BlogPostPublishedTest extends ProjectorScenarioTestCase
                 $content,
                 $author,
                 $published,
-                $source
+                $source,
+                ""
             )])
             ->when(new BlogPostEdited(
                 new BlogPostId($blogPostId),
@@ -36,7 +38,8 @@ class BlogPostPublishedTest extends ProjectorScenarioTestCase
                 $content,
                 $author,
                 true,
-                $source
+                $source,
+                '2015-01-01 12:11:10'
             ))
             ->then([
                 $this->createReadModel(
@@ -44,7 +47,8 @@ class BlogPostPublishedTest extends ProjectorScenarioTestCase
                     $title,
                     $content,
                     $author,
-                    $source
+                    $source,
+                    new DateTime('2015-01-01 12:11:10')
                 )
             ]);
     }
@@ -65,7 +69,8 @@ class BlogPostPublishedTest extends ProjectorScenarioTestCase
                     $content,
                     $author,
                     true,
-                    $source
+                    $source,
+                    '2015-01-01 12:11:10'
                 )
             ])
             ->when(new BlogPostEdited(
@@ -74,7 +79,8 @@ class BlogPostPublishedTest extends ProjectorScenarioTestCase
                 $content,
                 $author,
                 false,
-                $source
+                $source,
+                ''
             ))
             ->then([
             ]);
@@ -91,14 +97,16 @@ class BlogPostPublishedTest extends ProjectorScenarioTestCase
 
     /**
      * @param BlogPostId $blogPostId
-     * @param string $title
-     * @param string $content
-     * @param string $author
+     * @param string|string $title
+     * @param string|string $content
+     * @param string|string $author
+     * @param string $source
+     * @param DateTime $publishDate
      * @return BlogPostsPublished
      */
-    private function createReadModel(BlogPostId $blogPostId, string $title, string $content, string $author, string $source) : BlogPostsPublished
+    private function createReadModel(BlogPostId $blogPostId, string $title, string $content, string $author, string $source, DateTime $publishDate) : BlogPostsPublished
     {
-        $readModel = new BlogPostsPublished($blogPostId, $title, $content, $author, $source, new \DateTime('now'));
+        $readModel = new BlogPostsPublished($blogPostId, $title, $content, $author, $source, new DateTime('now'), $publishDate);
         return $readModel;
     }
 }

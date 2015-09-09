@@ -44,7 +44,8 @@ class BlogPostCommandHandlerTest extends CommandHandlerScenarioTestCase
                     $command->content,
                     $command->author,
                     $command->published,
-                    $command->source
+                    $command->source,
+                    ""
                 )
             ]);
     }
@@ -70,7 +71,8 @@ class BlogPostCommandHandlerTest extends CommandHandlerScenarioTestCase
                     "content",
                     "author",
                     false,
-                    "mobile"
+                    "mobile",
+                    ""
                 )
             ])
             ->when($command)
@@ -81,7 +83,8 @@ class BlogPostCommandHandlerTest extends CommandHandlerScenarioTestCase
                     $command->content,
                     $command->author,
                     $command->published,
-                    $command->source
+                    $command->source,
+                    ""
                 )
             ]);
 
@@ -103,7 +106,8 @@ class BlogPostCommandHandlerTest extends CommandHandlerScenarioTestCase
                     "content",
                     "author",
                     false,
-                    "mobile"
+                    "mobile",
+                    ""
                 )
             ])
             ->when($command)
