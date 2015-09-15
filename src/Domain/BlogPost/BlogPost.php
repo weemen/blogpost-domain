@@ -117,7 +117,7 @@ class BlogPost extends EventSourcedAggregateRoot
         $publishDate = $this->publishDate;
         if (!empty($this->publishDate) && $published) {
             $dateTime    = new \DateTime('now');
-            $publishDate = $dateTime->createFromFormat('Y-m-d H:i:s');
+            $publishDate = $dateTime->createFromFormat('Y-m-d H:i:s', $publishDate);
         }
 
         $this->apply(new BlogPostEdited($blogPostId, $title, $content, $author, $published, $source, $publishDate));
