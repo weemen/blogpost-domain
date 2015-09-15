@@ -70,12 +70,11 @@ class BlogPost extends EventSourcedAggregateRoot
      * @param bool $published
      * @return BlogPost
      */
-    public static function createBlogPost(BlogPostId $blogPostId, string $title, string $content, string $author, bool $published, string $source) : BlogPost
+    public static function createBlogPost(BlogPostId $blogPostId, string $title, string $content, string $author, bool $published, string $source, \DateTime $publishDate) : BlogPost
     {
-        $publishDate = '';
         if ($published) {
             $dateTime    = new \DateTime('now');
-            $publishDate = $dateTime->createFromFormat('Y-m-d H:i:s');
+            $publishDate = $dateTime->createFromFormat('Y-m-d H:i:s', $publishDate);
         }
 
         $blogPost = new BlogPost();
