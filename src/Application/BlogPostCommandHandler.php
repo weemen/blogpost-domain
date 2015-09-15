@@ -50,7 +50,8 @@ class BlogPostCommandHandler extends CommandHandler
                 $command->content,
                 $command->author,
                 $command->published,
-                $command->source
+                $command->source,
+                $command->publishDate
             )
         );
     }
@@ -68,7 +69,8 @@ class BlogPostCommandHandler extends CommandHandler
             $command->content,
             $command->author,
             $command->published,
-            $command->source
+            $command->source,
+            $command->publishDate
         );
         $this->repository->save($blogPost);
     }

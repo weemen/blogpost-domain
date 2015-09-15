@@ -35,4 +35,9 @@ class CreateBlogPost
      * @var string
      */
     public $source;
+
+    /**
+     * @var \DateTime
+     */
+    public $publishDate;
 }

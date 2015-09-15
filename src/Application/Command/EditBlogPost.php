@@ -35,4 +35,9 @@ class EditBlogPost
      * @var string
      */
     public $source;
+
+    /**
+     * @var \DateTime
+     */
+    public $publishDate;
 }
