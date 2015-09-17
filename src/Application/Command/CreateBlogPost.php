@@ -37,7 +37,7 @@ class CreateBlogPost
     public $source;
 
     /**
-     * @var \DateTime
+     * @var string
      */
     public $publishDate;
 }

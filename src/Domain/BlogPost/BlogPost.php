@@ -45,7 +45,7 @@ class BlogPost extends EventSourcedAggregateRoot
     protected $deleted;
 
     /**
-     * @var string
+     * @var DateTime
      */
     protected $publishDate;
 
@@ -70,7 +70,7 @@ class BlogPost extends EventSourcedAggregateRoot
      * @param bool $published
      * @return BlogPost
      */
-    public static function createBlogPost(BlogPostId $blogPostId, string $title, string $content, string $author, bool $published, string $source, \DateTime $publishDate) : BlogPost
+    public static function createBlogPost(BlogPostId $blogPostId, string $title, string $content, string $author, bool $published, string $source, string $publishDate) : BlogPost
     {
         if ($published) {
             $dateTime    = new \DateTime('now');
@@ -96,7 +96,7 @@ class BlogPost extends EventSourcedAggregateRoot
         $this->source     = $event->source();
         $this->deleted    = false;
         $this->lastModificationDate = new \DateTime('now');
-        $this->publishDate = $event->publishDate();
+        $this->publishDate = \DateTime::createFromFormat('Y-m-d H:i:s', $event->publishDate());
     }
 
     /**

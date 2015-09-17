@@ -15,30 +15,31 @@ class BlogPostTest extends AggregateRootScenarioTestCase
 
         $this->scenario
             ->when(function() use ($blogPostId) {
-                return BlogPost::createBlogPost($blogPostId, "title", "content", "Leon", false, "twitter");
+                return BlogPost::createBlogPost($blogPostId, "title", "content", "Leon", false, "twitter", "2015-01-01 12:13:14");
             })
-            ->then([new BlogPostCreated($blogPostId, "title", "content", "Leon", false, "twitter", "")]);
+            ->then([new BlogPostCreated($blogPostId, "title", "content", "Leon", false, "twitter", "2015-01-01 12:13:14")]);
     }
 
     public function testItCanEditExistingBlogPost()
     {
-        $blogPostId = new BlogPostId($this->createGenerator()->generate());
-        $title      = "blogPostTitle";
-        $content    = "content";
-        $author     = "Leon";
-        $published  = false;
-        $source     = "twitter";
+        $blogPostId  = new BlogPostId($this->createGenerator()->generate());
+        $title       = "blogPostTitle";
+        $content     = "content";
+        $author      = "Leon";
+        $published   = false;
+        $source      = "twitter";
+        $publishDate = "";
 
         $this->scenario
             ->withAggregateId($blogPostId)
             ->given([
-                new BlogPostCreated($blogPostId, "originalTitle", "originalContent", "originalAuthor", $published, "twitter", "")
+                new BlogPostCreated($blogPostId, "originalTitle", "originalContent", "originalAuthor", $published, "twitter", $publishDate)
             ])
-            ->when(function($blogPost) use ($blogPostId, $title, $content, $author, $published, $source) {
-                $blogPost->editBlogPost($blogPostId, $title, $content, $author, $published, $source);
+            ->when(function($blogPost) use ($blogPostId, $title, $content, $author, $published, $source, $publishDate) {
+                $blogPost->editBlogPost($blogPostId, $title, $content, $author, $published, $source, $publishDate);
             })
             ->then([
-                new BlogPostEdited($blogPostId, $title, $content, $author, $published, $source, "")
+                new BlogPostEdited($blogPostId, $title, $content, $author, $published, $source, $publishDate)
             ]);
     }
 

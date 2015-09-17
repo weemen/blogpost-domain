@@ -26,13 +26,14 @@ class BlogPostCommandHandlerTest extends CommandHandlerScenarioTestCase
     {
         $generator = $this->createUuidGenerator();
 
-        $command             = new CreateBlogPost();
-        $command->blogPostId = $generator->generate();
-        $command->title      = 'title';
-        $command->content    = 'content';
-        $command->author     = 'author';
-        $command->published  = false;
-        $command->source     = "twitter";
+        $command                = new CreateBlogPost();
+        $command->blogPostId    = $generator->generate();
+        $command->title         = 'title';
+        $command->content       = 'content';
+        $command->author        = 'author';
+        $command->published     = false;
+        $command->source        = "twitter";
+        $command->publishDate   = "2015-01-01 15:06:07";
 
         $this->scenario
             ->given([])
@@ -45,7 +46,7 @@ class BlogPostCommandHandlerTest extends CommandHandlerScenarioTestCase
                     $command->author,
                     $command->published,
                     $command->source,
-                    ""
+                    $command->publishDate
                 )
             ]);
     }
@@ -72,6 +73,7 @@ class BlogPostCommandHandlerTest extends CommandHandlerScenarioTestCase
                     "author",
                     false,
                     "mobile",
+                    "",
                     ""
                 )
             ])
@@ -84,6 +86,7 @@ class BlogPostCommandHandlerTest extends CommandHandlerScenarioTestCase
                     $command->author,
                     $command->published,
                     $command->source,
+                    "",
                     ""
                 )
             ]);
