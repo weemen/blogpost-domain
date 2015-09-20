@@ -53,6 +53,8 @@ class BlogPostsPublishedProjector extends Projector
             return;
         }
 
+        $publishDate = \DateTime::createFromFormat('Y-m-d H:i:s',$event->publishDate());
+
         $readModel = new BlogPostsPublished(
             $event->blogPostId(),
             $event->title(),
@@ -60,7 +62,7 @@ class BlogPostsPublishedProjector extends Projector
             $event->author(),
             $event->source(),
             new DateTime('now'),
-            \DateTime::createFromFormat('Y-m-d H:i:s',$event->publishDate())
+            $publishDate->getTimestamp()
         );
 
         $this->repository->save($readModel);

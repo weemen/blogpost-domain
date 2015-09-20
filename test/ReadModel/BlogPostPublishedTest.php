@@ -22,6 +22,8 @@ class BlogPostPublishedTest extends ProjectorScenarioTestCase
         $published  = false;
         $source     = "twitter";
 
+        $publishDate = new DateTime('2015-01-01 12:11:10');
+
         $this->scenario
             ->given([new BlogPostCreated(
                 new BlogPostId($blogPostId),
@@ -39,7 +41,7 @@ class BlogPostPublishedTest extends ProjectorScenarioTestCase
                 $author,
                 true,
                 $source,
-                '2015-01-01 12:11:10'
+                $publishDate->format('Y-m-d H:i:s')
             ))
             ->then([
                 $this->createReadModel(
@@ -48,7 +50,7 @@ class BlogPostPublishedTest extends ProjectorScenarioTestCase
                     $content,
                     $author,
                     $source,
-                    new DateTime('2015-01-01 12:11:10')
+                    $publishDate->getTimestamp()
                 )
             ]);
     }
@@ -104,7 +106,7 @@ class BlogPostPublishedTest extends ProjectorScenarioTestCase
      * @param DateTime $publishDate
      * @return BlogPostsPublished
      */
-    private function createReadModel(BlogPostId $blogPostId, string $title, string $content, string $author, string $source, DateTime $publishDate) : BlogPostsPublished
+    private function createReadModel(BlogPostId $blogPostId, string $title, string $content, string $author, string $source, int $publishDate) : BlogPostsPublished
     {
         $readModel = new BlogPostsPublished($blogPostId, $title, $content, $author, $source, new DateTime('now'), $publishDate);
         return $readModel;
